@@ -7,6 +7,7 @@ module.exports = defineConfig({
     baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
   },
+  reporter: [['html', { open: 'never' }]],
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:5173',

@@ -45,6 +45,7 @@ Accessibility: Toast uses `role="status"` and auto-hides after ~1200ms.
 - `npm run preview` — preview production build
 - `npm run test` — run Playwright tests
 - `npm run test:ui` — open Playwright Test UI
+- `npm run show-report` -  open Playwright HTML report
 
 ## Candidate tasks
 - Add a 2FA step after login (UI + test via route interception to force requires2FA)
@@ -60,9 +61,10 @@ Accessibility: Toast uses `role="status"` and auto-hides after ~1200ms.
   - `components/` — `Toast.jsx`, `Drawer.jsx`
   - `lib/` — `api.js`, `csv.js`
 - `tests/` — Playwright specs
+-  `pages` - Contains Page Objects for UI Tests.
 - `playwright.config.ts`, `vite.config.js`
 
-## Notes
+## Notes  
 - Uses `fetch` directly, no env vars needed
 - Minimal inline styles; no CSS frameworks
 - CSV export includes only currently visible (filtered) posts
