@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../pages/login'
-import {Dashboard} from '../pages/dashboard'
+import { LoginPage } from '../pages/login.js'
+import {Dashboard} from '../pages/dashboard.js'
 
 // // Ensure clean state
 // async function login(page) {
