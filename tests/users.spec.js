@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 async function login(page) {
-  await page.goto('/login')
+  await page.goto('http://localhost:5173/')
   await page.getByLabel('Username').fill('demo')
   await page.getByLabel('Password').fill('pass123')
   await page.getByRole('button', { name: 'Login' }).click()
