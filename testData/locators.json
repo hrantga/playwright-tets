@@ -1,0 +1,27 @@
+{
+    "Dashbaord": {
+    "DashboardButton": {
+      "role": "link",
+      "options": {
+        "name": "Dashboard"
+      }
+    } 
+  },
+   "Posts": {
+    "PostsButton": {
+      "role": "link",
+      "options": {
+        "name": "Posts"
+      }
+    }
+},
+ "Users": {
+    "UsersButton": {
+      "role": "link",
+      "options": {
+        "name": "Users"
+      }
+    }
+}
+
+}
