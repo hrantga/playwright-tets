@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test'
+
+test('happy path login and logout', async ({ page }) => {
+  await page.goto('/login')
+  await page.getByLabel('Username').fill('demo')
+  await page.getByLabel('Password').fill('pass123')
+  await page.getByRole('button', { name: 'Login' }).click()
+  await expect(page).toHaveURL(/\/dashboard$/)
+  await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
+  await page.locator("//button[text()='Logout']").click()
+  await expect(page).toHaveURL(/\/login$/)
+
+})
+
+

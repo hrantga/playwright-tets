@@ -8,3 +8,12 @@ test('happy path login redirects to dashboard and shows welcome text', async ({ 
   await expect(page).toHaveURL(/\/dashboard$/)
   await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
 })
+
+test('failure case for login screen', async ({ page }) => {
+  await page.goto('/login')
+  await page.getByLabel('Username').fill('demo')
+  await page.getByLabel('Password').fill('pass111')
+  await page.getByRole('button', { name: 'Login' }).click()
+  const errorMessageLocator = await page.locator("//div[@role='alert']")
+  await expect(errorMessageLocator).toBeVisible()
+})
