@@ -28,3 +28,28 @@ test('users list can sort A→Z', async ({ page }) => {
   const sorted = [...names].sort((a, b) => a.localeCompare(b))
   expect(names[0]).toBe(sorted[0])
 })
+
+test('Check Go to Users button', async ({ page }) => {
+  await login(page)
+  await page.getByRole('link', { name: 'Go to Users', exact: true }).click()
+  await expect(page).toHaveURL(/\/users$/)
+})
+
+test('Test Click on View Button in User', async ({ page, context }) => {
+  await login(page)
+  await page.getByRole('link', { name: 'Go to Users', exact: true }).click()
+  await expect(page).toHaveURL(/\/users$/)
+  await page.getByRole("button",{name: "view"}).first().click()
+  await page.getByRole("button",{name: "close"}).click()
+  await expect(page).toHaveURL(/\/users$/)
+})
+
+test('Check Go to Dashboard from users page', async ({ page, context }) => {
+  await login(page)
+  await page.getByRole('link', { name: 'Go to Users', exact: true }).click()
+  await expect(page).toHaveURL(/\/users$/)
+  await page.getByRole('link', { name: 'Dashboard', exact: true }).click()
+  await expect(page).toHaveURL(/\/dashboard$/)
+
+})
+
