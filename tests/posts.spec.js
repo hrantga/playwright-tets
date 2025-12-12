@@ -1,16 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-// Ensure clean state
-async function login(page) {
-  await page.goto('/login')
-  await page.getByLabel('Username').fill('demo')
-  await page.getByLabel('Password').fill('pass123')
-  await page.getByRole('button', { name: 'Login' }).click()
-  await expect(page).toHaveURL(/\/dashboard$/)
-}
-
 test('filter posts, verify, and export CSV', async ({ page, context }) => {
-  await login(page)
   await page.getByRole('link', { name: 'Posts' }).click()
   await expect(page).toHaveURL(/\/posts$/)
 
