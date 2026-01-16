@@ -1,20 +1,10 @@
 import { test, expect } from '@playwright/test'
-
-//import { genericPageMethods } from "./helper/genericPageMethods";
+import { genericPageMethods } from "./helper/genericPageMethods";
 
 test('filter posts, verify, and export CSV', async ({ page, context }) => {
-  
-  await page.goto('/login')
-  await page.getByLabel('Username').fill('demo')
-  await page.getByLabel('Password').fill('pass123')
-  await page.getByRole('button', { name: 'Login' }).click()
-  await expect(page).toHaveURL(/\/dashboard$/)
-  await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
-  
 
-  // let generic = new genericPageMethods(page);
-
-//  console.log("Am here after login");
+  let generic = new genericPageMethods(page);
+  await generic.loginWithDetails('demo', 'pass123', 'Demo');
 
   await page.getByRole('link', { name: 'Go to Posts' }).click()
   await expect(page).toHaveURL(/\/posts$/)
@@ -23,7 +13,7 @@ test('filter posts, verify, and export CSV', async ({ page, context }) => {
   const rowWithQui = page.getByRole('row').filter({ hasText: /\bqui\b/i })
   await expect(rowWithQui.first()).toBeVisible()
 
-  const [ download ] = await Promise.all([
+  const [download] = await Promise.all([
     page.waitForEvent('download'),
     page.getByRole('button', { name: 'Export CSV' }).click(),
   ])
