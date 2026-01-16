@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
 import { genericPageMethods } from "./helper/genericPageMethods";
+let generic = new genericPageMethods();
 
-test('filter posts, verify, and export CSV', async ({ page, context }) => {
+test('filter posts, verify, and export CSV', async ({ page }) => {
 
-  let generic = new genericPageMethods(page);
-  await generic.loginWithDetails('demo', 'pass123', 'Demo');
+  await generic.loginWithDetails(page, 'demo', 'pass123', 'Demo');
 
   await page.getByRole('link', { name: 'Go to Posts' }).click()
   await expect(page).toHaveURL(/\/posts$/)
