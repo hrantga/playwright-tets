@@ -1,7 +1,22 @@
 import { test, expect } from '@playwright/test'
 
+//import { genericPageMethods } from "./helper/genericPageMethods";
+
 test('filter posts, verify, and export CSV', async ({ page, context }) => {
-  await page.getByRole('link', { name: 'Posts' }).click()
+  
+  await page.goto('/login')
+  await page.getByLabel('Username').fill('demo')
+  await page.getByLabel('Password').fill('pass123')
+  await page.getByRole('button', { name: 'Login' }).click()
+  await expect(page).toHaveURL(/\/dashboard$/)
+  await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
+  
+
+  // let generic = new genericPageMethods(page);
+
+//  console.log("Am here after login");
+
+  await page.getByRole('link', { name: 'Go to Posts' }).click()
   await expect(page).toHaveURL(/\/posts$/)
 
   await page.getByPlaceholder('Filter by title').fill('qui')
