@@ -1,0 +1,21 @@
+{
+    "dashboard": {
+        "welcomeText": "Welcome, Demo User!"
+    },
+    "post":{
+        "postHeader": "Posts",
+        "table":{
+            "id": "ID",
+            "title": "Title",
+            "actions": "Actions"
+        }
+    },
+    "users":{
+        "userHeader": "Users",
+        "table":{
+            "name": "Name",
+            "userName":	"Username",
+            "actions": "Actions"
+        }
+    }
+}
