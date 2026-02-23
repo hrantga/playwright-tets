@@ -13,7 +13,7 @@ module.exports = defineConfig({
     reuseExistingServer: true,
     stdout: 'pipe',
     stderr: 'pipe',
-  },
+  }
 })
 
-
+ 
