@@ -2,6 +2,8 @@
 const { defineConfig } = require('@playwright/test')
 
 module.exports = defineConfig({
+  workers:1,
+  htmlreport:true,
   testDir: './tests',
   use: {
     baseURL: 'http://localhost:5173',
