@@ -1,10 +1,21 @@
 import { test, expect } from '@playwright/test'
+import LoginPage from '../pages/LoginPage.js'
 
-test('happy path login redirects to dashboard and shows welcome text', async ({ page }) => {
-  await page.goto('/login')
-  await page.getByLabel('Username').fill('demo')
-  await page.getByLabel('Password').fill('pass123')
-  await page.getByRole('button', { name: 'Login' }).click()
-  await expect(page).toHaveURL(/\/posts/)
-  await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
+test.describe('Login', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/')
+  })
+
+  test('happy path login redirects to dashboard and shows welcome text', async ({ page }) => {
+    const loginPage = new LoginPage(page)
+
+    if (await loginPage.isLoggedIn()) {
+      await loginPage.logout()
+      await page.waitForLoadState('domcontentloaded')
+    }
+
+    await loginPage.login()
+    await expect(page).toHaveURL(/\/dashboard/)
+    await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
+  })
 })
