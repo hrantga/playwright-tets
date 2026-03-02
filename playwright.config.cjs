@@ -1,6 +1,7 @@
 // CommonJS config to avoid ESM requirement warnings on older Node versions
 const { defineConfig } = require('@playwright/test')
 
+
 module.exports = defineConfig({
   testDir: './tests',
   use: {
