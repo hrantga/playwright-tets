@@ -1,10 +1,24 @@
 import { test, expect } from '@playwright/test'
+import { LoginPage } from "../pages/login.ts"
 
-test('happy path login redirects to dashboard and shows welcome text', async ({ page }) => {
-  await page.goto('/login')
-  await page.getByLabel('Username').fill('demo')
-  await page.getByLabel('Password').fill('pass123')
-  await page.getByRole('button', { name: 'Login' }).click()
-  await expect(page).toHaveURL(/\/posts/)
+test('login test user - positive case', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('demo', 'pass123')
+  await expect(page).toHaveURL(/\/dashboard/)
   await expect(page.getByRole('heading', { name: 'Welcome, Demo User!' })).toBeVisible()
+})
+
+test('login test user - negative case 1', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('demo12', 'pass123')
+  await loginPage.assertLoginErrorMessage();
+})
+
+test('login test user - negative case 2', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login(' ', ' ')
+  await loginPage.assertLoginErrorMessage();
 })
